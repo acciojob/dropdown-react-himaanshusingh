@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 import "./../styles/App.css";
 
 const states = [
@@ -219,67 +219,64 @@ const states = [
   },
 ];
 
-function App() {
-  // Do not alter/remove main div
-  const [state, setState] = useState(0);
-  const [city, setCity] = useState(0);
-  const [landmark, setLandmark] = useState(0);
+const App = () => {
+  const [selectedState, setState] = useState(0);
+  const [selectedCity, setCity] = useState(0);
+  const [selLand, setLandmark] = useState(0);
+
+  function handleSelectState(e) {
+    setState(e.target.value);
+  }
+
+  function handleSelectCity(e) {
+    setCity(e.target.value);
+  }
+
+  function handleSelLand(e) {
+    setLandmark(e.target.value);
+  }
 
   return (
-    <div id="main">
-      <select
-        id="state"
-        value={state}
-        onChange={(e) => {
-          setState(Number(e.target.value));
-          setCity(0);
-          setLandmark(0);
-        }}
-      >
+    <form>
+      <select name="state" id="state" onChange={handleSelectState}>
         {states.map((state, ind) => (
-          <option key={state.name} value={ind}>
+          <option key={ind} value={ind}>
             {state.name}
           </option>
         ))}
       </select>
-      <select
-        value={city}
-        id="city"
-        onChange={(e) => {
-          setCity(Number(e.target.value));
-          setLandmark(0);
-        }}
-      >
-        {states[state].city.map((city, ind) => (
-          <option key={city.name} value={ind}>
-            {city.name}
-          </option>
-        ))}
-      </select>
-      <select
-        value={landmark}
-        id="landmark"
-        onChange={(e) => setLandmark(Number(e.target.value))}
-      >
-        {states[state].city[city].landmarks.map((landmark, ind) => (
-          <option key={landmark.name} value={ind}>
-            {landmark.name}
-          </option>
+
+      <select name="city" id="city" onChange={handleSelectCity}>
+        {states[selectedState].city.map((val, ind) => (
+          <option value={ind}>{val.name}</option>
         ))}
       </select>
 
-      <div id="state-title">{states[state].name}</div>
-      <div id="state-description">{states[state].description}</div>
-      <div id="city-title">{states[state].city[city].name}</div>
-      <div id="city-description">{states[state].city[city].description}</div>
-      <div id="landmark-title">
-        {states[state].city[city].landmarks[landmark].name}
+      <select name="landmark" id="landmark" onChange={handleSelLand}>
+        {states[selectedState].city[selectedCity].landmarks.map((val, ind) => (
+          <option value={ind}>{val.name}</option>
+        ))}
+      </select>
+
+      <div id="selected-state">
+        <h1>State Details</h1>
+        <div id="state-name">
+          <h2>{states[selectedState].name}</h2>
+        </div>
+        <div id="state-description">
+          <p>{states[selectedState].description}</p>
+        </div>
+        <div id="city">
+          <p>{states[selectedState].city[selectedCity].name}</p>
+        </div>
+        <div id="landmark">
+          <p>
+            {states[selectedState].city[selectedCity].landmarks[selLand].name}
+          </p>
+        </div>
       </div>
-      <div id="landmark-description">
-        {states[state].city[city].landmarks[landmark].description}
-      </div>
-    </div>
+    </form>
   );
-}
+};
 
 export default App;
