@@ -10,7 +10,7 @@ const states = [
       {
         name: "Indore",
         description:
-          "Indore is a city in west-central India. It's known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore's 19th-century Holkar dynasty.",
+          "Indore is a city in west-central India. It’s known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore’s 19th-century Holkar dynasty.",
         landmarks: [
           {
             name: "Mhow",
@@ -27,7 +27,7 @@ const states = [
       {
         name: "Bhopal",
         description:
-          "DBhopal is a city in the central Indian state of Madhya Pradesh. It's one of India's greenest city. There are two main lakes, the Upper Lake and the Lower Lake.",
+          "DBhopal is a city in the central Indian state of Madhya Pradesh. It's one of India’s greenest city. There are two main lakes, the Upper Lake and the Lower Lake.",
         landmarks: [
           {
             name: "MANIT",
@@ -117,7 +117,7 @@ const states = [
       {
         name: "Guwhati",
         description:
-          "Guwahati is a sprawling city beside the Brahmaputra River in the northeast Indian state of Assam. It's known for holy sites like the hilltop Kamakhya Temple,",
+          "Guwahati is a sprawling city beside the Brahmaputra River in the northeast Indian state of Assam. It’s known for holy sites like the hilltop Kamakhya Temple,",
         landmarks: [
           {
             name: "Ganesh Guri",
@@ -186,7 +186,7 @@ const states = [
       {
         name: "Gaya",
         description:
-          "Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It's known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
+          "Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It’s known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
         landmarks: [
           {
             name: "Bakraur",
@@ -220,26 +220,26 @@ const states = [
 ];
 
 const App = () => {
-  const [selectedState, setState] = useState(0);
-  const [selectedCity, setCity] = useState(0);
-  const [selLand, setLandmark] = useState(0);
+  const [state, setState] = useState(0);
+  const [city, setCity] = useState(0);
+  const [landmark, setLandmark] = useState(0);
 
-  function handleSelectState(e) {
+  function handleStateChange(e) {
     setState(+e.target.value);
   }
 
-  function handleSelectCity(e) {
+  function handleCityChange(e) {
     setCity(+e.target.value);
   }
 
-  function handleSelLand(e) {
+  function handleLandChange(e) {
     setLandmark(+e.target.value);
   }
 
   return (
     <div id="main">
       <form>
-        <select name="state" id="state" onChange={handleSelectState}>
+        <select name="state" value={state} id="state" onChange={handleStateChange}>
           {states.map((state, ind) => (
             <option key={ind} value={ind}>
               {state.name}
@@ -247,42 +247,27 @@ const App = () => {
           ))}
         </select>
 
-        <select name="city" id="city" onChange={handleSelectCity}>
-          {states[selectedState].city.map((val, ind) => (
+        <select name="city" value={city} id="city" onChange={handleCityChange}>
+          {states[state].city.map((val, ind) => (
             <option value={ind}>{val.name}</option>
           ))}
         </select>
 
-        <select name="landmark" id="landmark" onChange={handleSelLand}>
-          {states[selectedState].city[selectedCity].landmarks.map(
-            (val, ind) => (
-              <option value={ind}>{val.name}</option>
-            )
-          )}
+        <select name="landmark" value={landmark} id="landmark" onChange={handleLandChange}>
+          {states[state].city[city].landmarks.map((val, ind) => (
+            <option value={ind}>{val.name}</option>
+          ))}
         </select>
 
-        <div id="state-title">
-          <h1>{states[selectedState].name}</h1>
-        </div>
-        <div id="state-description">{states[selectedState].description}</div>
-        <div id="city-title">
-          {states[selectedState].city[selectedCity].name}
-        </div>
-        <div id="city-description">
-          {states[selectedState].city[selectedCity].description}
-        </div>
-        <div id="landmark-title">
-          {states[selectedState].city[selectedCity].landmarks[selLand].name}
-        </div>
-        <div id="landmark-description">
-          {
-            states[selectedState].city[selectedCity].landmarks[selLand]
-              .description
-          }
-        </div>
+        <div id="state-title">{states[state].name}</div>
+        <div id="state-description">{states[state].description}</div>
+        <div id="city-title">{states[state].city[city].name}</div>
+        <div id="city-description">{states[state].city[city].description}</div>
+        <div id="landmark-title">{states[state].city[city].landmarks[landmark].name}</div>
+        <div id="landmark-description">{states[state].city[city].landmarks[landmark].description}</div>
       </form>
     </div>
-  );
+  ); // prettier-ignore
 };
 
 export default App;
