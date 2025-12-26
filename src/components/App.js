@@ -225,45 +225,45 @@ const App = () => {
   const [landmark, setLandmark] = useState(0);
 
   function handleStateChange(e) {
-    setState(+e.target.value);
+    setState(Number(e.target.value));
+    setCity(0);
+    setLandmark(0);
   }
 
   function handleCityChange(e) {
-    setCity(+e.target.value);
+    setCity(Number(e.target.value));
+    setLandmark(0);
   }
-
   function handleLandChange(e) {
-    setLandmark(+e.target.value);
+    setLandmark(Number(e.target.value));
   }
 
   return (
     <div id="main">
-      <form>
-        <select name="state" value={state} id="state" onChange={handleStateChange}>
-          {states.map((state, ind) => (
-            <option key={ind} value={ind}>{state.name}</option>
-          ))}
-        </select>
+      <select name="state" value={state} id="state" onChange={handleStateChange}>
+        {states.map((state, ind) => (
+          <option key={state.name} value={ind}>{state.name}</option>
+        ))}
+      </select>
 
-        <select name="city" value={city} id="city" onChange={handleCityChange}>
-          {states[state].city.map((val, ind) => (
-            <option value={ind}>{val.name}</option>
-          ))}
-        </select>
+      <select name="city" value={city} id="city" onChange={handleCityChange}>
+        {states[state].city.map((val, ind) => (
+          <option key={val.name} value={ind}>{val.name}</option>
+        ))}
+      </select>
 
-        <select name="landmark" value={landmark} id="landmark" onChange={handleLandChange}>
-          {states[state].city[city].landmarks.map((val, ind) => (
-            <option value={ind}>{val.name}</option>
-          ))}
-        </select>
+      <select name="landmark" value={landmark} id="landmark" onChange={handleLandChange}>
+        {states[state].city[city].landmarks.map((val, ind) => (
+          <option key={val.name} value={ind}>{val.name}</option>
+        ))}
+      </select>
 
-        <div id="state-title">{states[state].name}</div>
-        <div id="state-description">{states[state].description}</div>
-        <div id="city-title">{states[state].city[city].name}</div>
-        <div id="city-description">{states[state].city[city].description}</div>
-        <div id="landmark-title">{states[state].city[city].landmarks[landmark].name}</div>
-        <div id="landmark-description">{states[state].city[city].landmarks[landmark].description}</div>
-      </form>
+      <div id="state-title">{states[state].name}</div>
+      <div id="state-description">{states[state].description}</div>
+      <div id="city-title">{states[state].city[city].name}</div>
+      <div id="city-description">{states[state].city[city].description}</div>
+      <div id="landmark-title">{states[state].city[city].landmarks[landmark].name}</div>
+      <div id="landmark-description">{states[state].city[city].landmarks[landmark].description}</div>
     </div>
   ); // prettier-ignore
 };
