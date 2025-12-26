@@ -226,10 +226,13 @@ const App = () => {
 
   function handleStateChange(e) {
     setState(Number(e.target.value));
+    setCity(0);
+    setLandmark(0);
   }
 
   function handleCityChange(e) {
     setCity(Number(e.target.value));
+    setLandmark(0);
   }
 
   function handleLandChange(e) {
