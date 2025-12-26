@@ -258,30 +258,23 @@ const App = () => {
         ))}
       </select>
 
-      <div id="selected-state">
-        <h1>State Details</h1>
-        <div id="state-title">
-          <h2>{states[selectedState].name}</h2>
-        </div>
-        <div id="state-description">
-          <p>{states[selectedState].description}</p>
-        </div>
-        <div id="city-title">
-          <p>{states[selectedState].city[selectedCity].name}</p>
-        </div>
-        <div id="city-description">
-          <p>{states[selectedState].city[selectedCity].description}</p>
-        </div>
-        <div id="landmark-title">
-          <p>
-            {states[selectedState].city[selectedCity].landmarks[selLand].name}
-          </p>
-        </div>
-        <div id="landmark-description">
-          <p>
-            {states[selectedState].city[selectedCity].landmarks[selLand].description}
-          </p>
-        </div>
+      <h1>State Details</h1>
+      <div id="state-title">
+        <h2>{states[selectedState].name}</h2>
+      </div>
+      <div id="state-description">{states[selectedState].description}</div>
+      <div id="city-title">{states[selectedState].city[selectedCity].name}</div>
+      <div id="city-description">
+        {states[selectedState].city[selectedCity].description}
+      </div>
+      <div id="landmark-title">
+        {states[selectedState].city[selectedCity].landmarks[selLand].name}
+      </div>
+      <div id="landmark-description">
+        {
+          states[selectedState].city[selectedCity].landmarks[selLand]
+            .description
+        }
       </div>
     </form>
   );
