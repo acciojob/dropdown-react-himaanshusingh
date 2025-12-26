@@ -225,58 +225,63 @@ const App = () => {
   const [selLand, setLandmark] = useState(0);
 
   function handleSelectState(e) {
-    setState(e.target.value);
+    setState(+e.target.value);
   }
 
   function handleSelectCity(e) {
-    setCity(e.target.value);
+    setCity(+e.target.value);
   }
 
   function handleSelLand(e) {
-    setLandmark(e.target.value);
+    setLandmark(+e.target.value);
   }
 
   return (
-    <form>
-      <select name="state" id="state" onChange={handleSelectState}>
-        {states.map((state, ind) => (
-          <option key={ind} value={ind}>
-            {state.name}
-          </option>
-        ))}
-      </select>
+    <div id="main">
+      <form>
+        <select name="state" id="state" onChange={handleSelectState}>
+          {states.map((state, ind) => (
+            <option key={ind} value={ind}>
+              {state.name}
+            </option>
+          ))}
+        </select>
 
-      <select name="city" id="city" onChange={handleSelectCity}>
-        {states[selectedState].city.map((val, ind) => (
-          <option value={ind}>{val.name}</option>
-        ))}
-      </select>
+        <select name="city" id="city" onChange={handleSelectCity}>
+          {states[selectedState].city.map((val, ind) => (
+            <option value={ind}>{val.name}</option>
+          ))}
+        </select>
 
-      <select name="landmark" id="landmark" onChange={handleSelLand}>
-        {states[selectedState].city[selectedCity].landmarks.map((val, ind) => (
-          <option value={ind}>{val.name}</option>
-        ))}
-      </select>
+        <select name="landmark" id="landmark" onChange={handleSelLand}>
+          {states[selectedState].city[selectedCity].landmarks.map(
+            (val, ind) => (
+              <option value={ind}>{val.name}</option>
+            )
+          )}
+        </select>
 
-      <h1>State Details</h1>
-      <div id="state-title">
-        <h2>{states[selectedState].name}</h2>
-      </div>
-      <div id="state-description">{states[selectedState].description}</div>
-      <div id="city-title">{states[selectedState].city[selectedCity].name}</div>
-      <div id="city-description">
-        {states[selectedState].city[selectedCity].description}
-      </div>
-      <div id="landmark-title">
-        {states[selectedState].city[selectedCity].landmarks[selLand].name}
-      </div>
-      <div id="landmark-description">
-        {
-          states[selectedState].city[selectedCity].landmarks[selLand]
-            .description
-        }
-      </div>
-    </form>
+        <div id="state-title">
+          <h1>{states[selectedState].name}</h1>
+        </div>
+        <div id="state-description">{states[selectedState].description}</div>
+        <div id="city-title">
+          {states[selectedState].city[selectedCity].name}
+        </div>
+        <div id="city-description">
+          {states[selectedState].city[selectedCity].description}
+        </div>
+        <div id="landmark-title">
+          {states[selectedState].city[selectedCity].landmarks[selLand].name}
+        </div>
+        <div id="landmark-description">
+          {
+            states[selectedState].city[selectedCity].landmarks[selLand]
+              .description
+          }
+        </div>
+      </form>
+    </div>
   );
 };
 
